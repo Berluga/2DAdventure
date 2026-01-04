@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public VoidEventSO afterSceneLoadedEvent;
     public VoidEventSO loadDataEvent;
     public VoidEventSO backToMenuEvent;
+    public VoidEventSO winEvent;
 
     public PlayerInputControl inputControl;
     public Vector2 inputDirection;
@@ -94,6 +95,7 @@ public class PlayerController : MonoBehaviour
         afterSceneLoadedEvent.OnEventRaised += OnAfterSceneLoadEvent;
         loadDataEvent.OnEventRaised += OnLoadDataEvent;
         backToMenuEvent.OnEventRaised += OnLoadDataEvent;
+        winEvent.OnEventRaised += OnWinEvent;
     }
 
 
@@ -104,9 +106,10 @@ public class PlayerController : MonoBehaviour
         afterSceneLoadedEvent.OnEventRaised -= OnAfterSceneLoadEvent;
         loadDataEvent.OnEventRaised -= OnLoadDataEvent;
         backToMenuEvent.OnEventRaised -= OnLoadDataEvent;
+        winEvent.OnEventRaised -= OnWinEvent;
     }
 
-   
+
 
     private void Update()
     {
@@ -294,7 +297,12 @@ public class PlayerController : MonoBehaviour
         inputControl.GamePlay.Disable();
     }
 
-  
+    public void OnWinEvent()
+    {
+        inputControl.GamePlay.Disable();
+    }
+
+
     private void CheckState()
     {
         coll.sharedMaterial = physicsCheck.isGround ? normal : wall;

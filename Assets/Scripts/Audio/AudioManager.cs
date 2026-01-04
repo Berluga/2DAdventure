@@ -47,7 +47,7 @@ public class AudioManager : MonoBehaviour
 
     private void OnVolumeEvent(float amount)
     {
-        mixer.SetFloat("MasterVolume", amount * 100 - 80);
+        mixer.SetFloat("MasterVolume", amount * 100 -80 );
     }
 
     private void OnBGMEvent(AudioClip clip)

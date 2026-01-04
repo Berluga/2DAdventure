@@ -7,17 +7,21 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public PlayerStatBar playerStatBar;
-    [Header("事件监听")]
 
+    [Header("事件监听")]
     public CharacterEventSO healthEvent;
     public SceneLoadEventSO unloadedSceneEvent;
     public VoidEventSO loadDataEvent;
+    public VoidEventSO newGameEvent;
+    public VoidEventSO winEvent;
     public VoidEventSO gameOverEvent;
     public VoidEventSO backToMenuEvent;
     public FloatEventSO syncVolumeEvent;
 
     [Header("组件")]
     public GameObject gameOverPanel;
+    public GameObject winPanel;
+    public GameObject loadBtn;
     public GameObject restartBtn;
     public GameObject mobileTouch;
     public Button settingButton;
@@ -41,7 +45,9 @@ public class UIManager : MonoBehaviour
         healthEvent.OnEventRaised += OnHealthEvent;
         unloadedSceneEvent.LoadRequestEvent += OnUnLoadSceneEvent;
         loadDataEvent.OnEventRaised += OnLoadDataEvent;
+        newGameEvent.OnEventRaised += OnNewGameEvent;
         gameOverEvent.OnEventRaised += OnGameOverEvent;
+        winEvent.OnEventRaised += OnWinEvent;
         backToMenuEvent.OnEventRaised += OnLoadDataEvent;
         syncVolumeEvent.OnEventRaised += OnSyncVolumeEvent;
     }
@@ -52,7 +58,9 @@ public class UIManager : MonoBehaviour
         healthEvent.OnEventRaised -= OnHealthEvent;
         unloadedSceneEvent.LoadRequestEvent -= OnUnLoadSceneEvent;
         loadDataEvent.OnEventRaised -= OnLoadDataEvent;
+        newGameEvent.OnEventRaised -= OnNewGameEvent;
         gameOverEvent.OnEventRaised -= OnGameOverEvent;
+        winEvent.OnEventRaised -= OnWinEvent;
         backToMenuEvent.OnEventRaised -= OnLoadDataEvent;
         syncVolumeEvent.OnEventRaised -= OnSyncVolumeEvent;
     }
@@ -79,12 +87,24 @@ public class UIManager : MonoBehaviour
     private void OnGameOverEvent()
     {
         gameOverPanel.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(restartBtn);
+        EventSystem.current.SetSelectedGameObject(loadBtn);
     }
 
     private void OnLoadDataEvent()
     {
         gameOverPanel.SetActive(false);
+        winPanel.SetActive(false);
+    }
+
+    private void OnWinEvent()
+    {
+        winPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(restartBtn);
+    }
+
+    private void OnNewGameEvent()
+    {
+        winPanel.SetActive(false);
     }
 
     private void OnUnLoadSceneEvent(GameSceneSO sceneToLoad, Vector3 arg1, bool arg2)
