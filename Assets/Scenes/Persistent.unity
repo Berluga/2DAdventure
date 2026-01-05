@@ -5554,6 +5554,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveDataEvent: {fileID: 11400000, guid: c67eaa59ab7564d45bef53f8532cf1e4, type: 2}
   loadDataEvent: {fileID: 11400000, guid: 65eba4f18e6aca94aa7b869ec9c7c9bb, type: 2}
+  newGameEvent: {fileID: 11400000, guid: 9b3a838e8682a0547af180899324a1f3, type: 2}
 --- !u!4 &2120626914
 Transform:
   m_ObjectHideFlags: 0

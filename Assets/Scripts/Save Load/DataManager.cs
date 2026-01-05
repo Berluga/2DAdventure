@@ -4,17 +4,20 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Newtonsoft.Json;
 using System.IO;
+using Unity.VisualScripting;
+using System;
 
 [DefaultExecutionOrder(-100)]
 public class DataManager : MonoBehaviour
 {
     public static DataManager instance;
-    [Header("ÊÂ¼ş¼àÌı")]
+    [Header("äº‹ä»¶ç›‘å¬")]
     public VoidEventSO saveDataEvent;
     public VoidEventSO loadDataEvent;
+    public VoidEventSO newGameEvent;
 
     private List<ISaveable> saveableList = new List<ISaveable>();
-    private Data saveData;
+    public Data saveData;
     private string jsonFolder;
     private void Awake()
     {
@@ -36,12 +39,21 @@ public class DataManager : MonoBehaviour
     {
         saveDataEvent.OnEventRaised += Save;
         loadDataEvent.OnEventRaised += Load;
+        newGameEvent.OnEventRaised += NewGame;
     }
     private void OnDisable()
     {
         saveDataEvent.OnEventRaised -= Save;
         loadDataEvent.OnEventRaised -= Load;
+        newGameEvent.OnEventRaised -= NewGame;
     }
+
+    private void NewGame()
+    {
+        saveData = new Data();
+    }
+
+
 
     //private void Update()
     //{

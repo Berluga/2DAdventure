@@ -44,6 +44,7 @@ public class Sign : MonoBehaviour
         if (canPress)
         {
             targetItem.TriggerAction();
+            canPress = false;
             GetComponent<AudioDefination>()?.PlayAudioClip();
         }
     }

@@ -94,6 +94,8 @@ public class UIManager : MonoBehaviour
     {
         gameOverPanel.SetActive(false);
         winPanel.SetActive(false);
+        pausePanel.SetActive(false);
+        Time.timeScale = 1;
     }
 
     private void OnWinEvent()
